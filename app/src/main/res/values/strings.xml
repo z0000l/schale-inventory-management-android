@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">在库管理</string>
+    <string name="app_subtitle">シャーレの総決算 概率计算器</string>
+
+    <string name="preset_label">关卡预设</string>
+    <string name="preset_1">关卡 1 · 龙须糖×1 / 老豆糕×5 / 月饼×2</string>
+    <string name="preset_2">关卡 2 · 麻花×1 / 杏仁豆腐×2 / 老豆糕×3</string>
+    <string name="preset_3">关卡 3 · 班戟×1 / 糖葫芦×3 / 月饼×2</string>
+    <string name="preset_4">关卡 4 · 龙须糖×1 / 老豆糕×5 / 月饼×2</string>
+    <string name="preset_5">关卡 5 · 麻花×1 / 杏仁豆腐×2 / 老豆糕×3</string>
+    <string name="preset_6">关卡 6 · 班戟×1 / 糖葫芦×3 / 月饼×2</string>
+    <string name="preset_7">关卡 7 · 杏仁豆腐×2 / 老豆糕×3 / 月饼×6</string>
+
+    <string name="action_calculate">计算概率</string>
+    <string name="action_recalculate">重新计算</string>
+    <string name="action_reset">重置棋盘</string>
+    <string name="action_place_item">放置物品</string>
+    <string name="action_rotate">旋转</string>
+    <string name="action_cancel">取消</string>
+    <string name="action_confirm">确定</string>
+
+    <string name="show_item_1">显示物品 1</string>
+    <string name="show_item_2">显示物品 2</string>
+    <string name="show_item_3">显示物品 3</string>
+
+    <string name="item_n">物品 %1$d</string>
+    <string name="item_size">%1$d × %2$d</string>
+    <string name="item_count">数量 %1$d</string>
+
+    <string name="status_idle">输入已变化，建议重新计算</string>
+    <string name="status_running">计算中…</string>
+    <string name="status_done">计算完成</string>
+
+    <string name="hint_tap_to_open">点击格子标记 / 取消"已翻开"</string>
+    <string name="hint_long_press_place">长按格子开始放置物品</string>
+    <string name="error_no_solution">在当前约束下不存在可行配置</string>
+
+    <string name="placed_n">第 %1$d 个</string>
+    <string name="placement_rotated">已旋转</string>
+
+    <string name="confirm_reset_title">重置棋盘？</string>
+    <string name="confirm_reset_message">将清空已翻开格子与所有已放置的物品。</string>
+
+    <string name="confirm_preset_title">切换关卡？</string>
+    <string name="confirm_preset_message">将重置当前所有输入。</string>
+
+    <string name="format_percent">%1$.1f%%</string>
+    <string name="prob_best">推荐</string>
+</resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 主题色：参考蓝色档案 "Schale" 标识 -->
+    <color name="schale_primary">#FF3D8FE0</color>
+    <color name="schale_primary_dark">#FF1F5FA8</color>
+    <color name="schale_accent">#FFFFD33C</color>
+
+    <!-- 棋盘相关 -->
+    <color name="board_bg">#FF11171F</color>
+    <color name="board_surface">#FF1B2330</color>
+    <color name="cover_unopened">#FF2A364B</color>
+    <color name="cover_opened">#FF424F66</color>
+    <color name="grid_line">#22FFFFFF</color>
+
+    <!-- 三种物品 -->
+    <color name="item_1">#FFE15B6E</color> <!-- red -->
+    <color name="item_2">#FFFFD93D</color> <!-- yellow -->
+    <color name="item_3">#FF6FC8EE</color> <!-- light blue -->
+
+    <!-- 状态色 -->
+    <color name="best_glow">#FFFFC85C</color>
+    <color name="text_primary">#FFF6F8FB</color>
+    <color name="text_secondary">#FFB3BCCB</color>
+    <color name="text_disabled">#FF6E7889</color>
+
+    <!-- 背景 -->
+    <color name="bg_main">#FF0E141C</color>
+    <color name="bg_panel">#FF161E2A</color>
+    <color name="bg_panel_high">#FF1F2A3A</color>
+    <color name="divider">#22FFFFFF</color>
+</resources>

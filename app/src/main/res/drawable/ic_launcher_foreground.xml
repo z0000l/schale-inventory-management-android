@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- 9 格小方块图案，象征棋盘 -->
+    <group android:translateX="22" android:translateY="22">
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M0,0h18v18h-18z M22,0h18v18h-18z M44,0h18v18h-18z M0,22h18v18h-18z M22,22h18v18h-18z M44,22h18v18h-18z M0,44h18v18h-18z M22,44h18v18h-18z M44,44h18v18h-18z" />
+    </group>
+    <!-- 中心高亮 -->
+    <group android:translateX="44" android:translateY="44">
+        <path
+            android:fillColor="#FFFFD33C"
+            android:pathData="M0,0h20v20h-20z" />
+    </group>
+</vector>
