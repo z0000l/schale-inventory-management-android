@@ -1,6 +1,6 @@
 # Schale Inventory Management · Android
 
-A native Android rewrite of [terry-u16/schale-inventory-management](https://github.com/terry-u16/schale-inventory-management) ([wx257osn2 fork](https://github.com/wx257osn2/terry-u16_schale-inventory-management)), originally a web app.
+100% made by Claude, a native Android rewrite of [terry-u16/schale-inventory-management](https://github.com/terry-u16/schale-inventory-management) ([wx257osn2 fork](https://github.com/wx257osn2/terry-u16_schale-inventory-management)), originally a web app,
 
 It is a probability calculator for the "Inventory Management" tile-flipping minigame in the *Blue Archive* event *Schale's Year-End Settlement with the Federal Student Council*. Given the cells you've already revealed, it infers the probability of each item appearing in every unrevealed cell.
 

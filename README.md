@@ -1,6 +1,6 @@
 # シャーレ在库管理 · Android 版
 
-把 [terry-u16/schale-inventory-management](https://github.com/terry-u16/schale-inventory-management)（[wx257osn2 fork](https://github.com/wx257osn2/terry-u16_schale-inventory-management)）从 Web 应用重写为现代 Android 原生应用。
+用Claude把 [terry-u16/schale-inventory-management](https://github.com/terry-u16/schale-inventory-management)（[wx257osn2 fork](https://github.com/wx257osn2/terry-u16_schale-inventory-management)）从 Web 应用重写为现代 Android 原生应用。
 
 游戏《碧蓝档案》活动「シャーレの総決算 with 联邦学生会」中"在库管理"翻牌玩法的概率计算器：根据已翻开的格子推断每个未翻开格子里出现各物品的概率。
 
