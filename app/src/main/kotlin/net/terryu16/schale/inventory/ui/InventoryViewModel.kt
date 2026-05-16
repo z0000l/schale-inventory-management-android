@@ -134,6 +134,10 @@ class InventoryViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun toggleCell(row: Int, col: Int) {
         if (row !in 0 until Board.HEIGHT || col !in 0 until Board.WIDTH) return
+        // 已放置物品覆盖的格子不允许 toggle —— 若误点会把 openMap 翻成 false，
+        // 但渲染又因 `occupied` 跳过该格，用户察觉不到 openMap 已和 placedItems 失同步；
+        // 这种"隐形损坏"过去会导致 buildIsMaxFlags 把 max 拉到 1.0 而看不到任何 glow。
+        if (_uiState.value.placedItems.any { it.covers(row, col) }) return
         var snapshot: UiState? = null
         _uiState.update {
             val newOpen = it.openMap.copyOf()
@@ -264,7 +268,7 @@ class InventoryViewModel(application: Application) : AndroidViewModel(applicatio
             }
             result.fold(
                 onSuccess = { probs ->
-                    val isMax = buildIsMaxFlags(probs, snapshot.openMap)
+                    val isMax = buildIsMaxFlags(probs, snapshot.openMap, snapshot.placedItems)
                     _uiState.update {
                         it.copy(
                             probs = probs,
@@ -284,15 +288,43 @@ class InventoryViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    private fun buildIsMaxFlags(probs: List<DoubleArray>, openMap: BooleanArray): List<BooleanArray> {
+    /**
+     * 计算"推荐翻开"高亮格子。
+     *
+     * 关键点：必须同时排除 openMap=true 和"已被 placedItems 覆盖"两个集合。
+     *
+     * 原因：calcProbabilities 会给已放置物品的格子打 prob=1.0（任何 flag 都包括），
+     * 如果只看 openMap，一旦 openMap 与 placedItems 失同步（比如手抖戳到已放置物品上
+     * 让 openMap 翻成 false，或 modifyItemGroup 把物品 shape 改大但没更新 openMap），
+     * 这些格子会被错误地纳入 max 比较 → max 被拉到 1.0 → 真正未翻开的格子的概率
+     * （如 0.67）打不平 max → BoardCanvas 又因 `if (occupied) continue` 跳过这些
+     * 已覆盖格不画 glow → 用户看到的就是"完全没有任何高亮"。
+     */
+    private fun buildIsMaxFlags(
+        probs: List<DoubleArray>,
+        openMap: BooleanArray,
+        placedItems: List<PlacedItem>,
+    ): List<BooleanArray> {
+        val covered = BooleanArray(Board.CELL_COUNT)
+        for (p in placedItems) {
+            val r0 = p.coord.row
+            val c0 = p.coord.col
+            for (r in r0 until r0 + p.effectiveHeight) {
+                for (c in c0 until c0 + p.effectiveWidth) {
+                    if (r in 0 until Board.HEIGHT && c in 0 until Board.WIDTH) {
+                        covered[Board.index(r, c)] = true
+                    }
+                }
+            }
+        }
         return probs.map { prob ->
             val rounded = DoubleArray(prob.size) { round(prob[it] * 1000) / 1000.0 }
             var max = 0.0
             for (i in rounded.indices) {
-                if (!openMap[i] && rounded[i] > max) max = rounded[i]
+                if (!openMap[i] && !covered[i] && rounded[i] > max) max = rounded[i]
             }
             BooleanArray(prob.size) { i ->
-                max > 0.0 && rounded[i] == max && !openMap[i]
+                max > 0.0 && rounded[i] == max && !openMap[i] && !covered[i]
             }
         }
     }
