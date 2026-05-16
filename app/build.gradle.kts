@@ -12,8 +12,8 @@ android {
         // 私用，仅跑 Android 14+，提高 minSdk 让 R8/支持库剥离老平台兼容代码
         minSdk = 34
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.0.1"
 
         ndk {
             // 只构建 arm64-v8a (v8a)
