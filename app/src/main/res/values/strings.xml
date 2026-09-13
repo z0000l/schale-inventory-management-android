@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">在库管理</string>
-    <string name="app_subtitle">シャーレの総決算 概率计算器</string>
+    <string name="app_subtitle">夏莱的总结算 概率计算器</string>
 
     <string name="preset_label">关卡预设</string>
     <string name="preset_1">关卡 1 · 龙须糖×1 / 老豆糕×5 / 月饼×2</string>
@@ -35,6 +35,8 @@
     <string name="hint_tap_to_open">点击格子标记 / 取消"已翻开"</string>
     <string name="hint_long_press_place">长按格子开始放置物品</string>
     <string name="error_no_solution">在当前约束下不存在可行配置</string>
+    <string name="error_out_of_memory">内存不足，计算失败：请减少物品数量或先放置已找到的物品</string>
+    <string name="error_calculation_failed">计算失败</string>
 
     <string name="placed_n">第 %1$d 个</string>
     <string name="placement_rotated">已旋转</string>

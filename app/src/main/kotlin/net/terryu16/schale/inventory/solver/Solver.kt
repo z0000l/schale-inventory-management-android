@@ -99,7 +99,7 @@ class Solver(private val state: SolverState, private val sampleCount: Int = 100_
     fun solve(): Result<List<DoubleArray>> {
         val (allCount, placements) = samplePlacements()
         if (allCount == 0L) {
-            return Result.failure(IllegalStateException("条件を満たす配置が存在しません"))
+            return Result.failure(NoSolutionException())
         }
         val probs = (0 until (1 shl Board.ITEM_GROUP_COUNT)).map { flag ->
             calcProbabilities(flag, placements)
@@ -352,3 +352,6 @@ data class Placement(
     val itemIndex: Int,
     val rotated: Boolean,
 )
+
+/** 当前约束下不存在任何可行配置。UI 层据此显示字符串资源 error_no_solution。 */
+class NoSolutionException : IllegalStateException("在当前约束下不存在可行配置")

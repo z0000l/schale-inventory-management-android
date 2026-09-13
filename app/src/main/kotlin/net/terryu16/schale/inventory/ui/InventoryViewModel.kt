@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import net.terryu16.schale.inventory.R
 import net.terryu16.schale.inventory.data.Board
 import net.terryu16.schale.inventory.data.Coord
 import net.terryu16.schale.inventory.data.Item
@@ -20,6 +21,7 @@ import net.terryu16.schale.inventory.data.PlacedItem
 import net.terryu16.schale.inventory.data.Preset
 import net.terryu16.schale.inventory.data.Presets
 import net.terryu16.schale.inventory.data.StatePersistence
+import net.terryu16.schale.inventory.solver.NoSolutionException
 import net.terryu16.schale.inventory.solver.Solver
 import net.terryu16.schale.inventory.solver.SolverPlacedItem
 import net.terryu16.schale.inventory.solver.SolverState
@@ -280,8 +282,16 @@ class InventoryViewModel(application: Application) : AndroidViewModel(applicatio
                     }
                 },
                 onFailure = { err ->
+                    // 只展示自有的中文文案，不把运行时的英文异常信息（如 OOM 详情）透给用户
+                    val message = getApplication<Application>().getString(
+                        when (err) {
+                            is NoSolutionException -> R.string.error_no_solution
+                            is OutOfMemoryError -> R.string.error_out_of_memory
+                            else -> R.string.error_calculation_failed
+                        }
+                    )
                     _uiState.update {
-                        it.copy(running = false, error = err.message ?: "计算失败")
+                        it.copy(running = false, error = message)
                     }
                 }
             )

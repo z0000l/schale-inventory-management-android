@@ -24,7 +24,7 @@ class SolverState(
     private val occupiedPrefix: IntArray
 
     init {
-        require(openMap.size == Board.CELL_COUNT) { "openMap size must be ${Board.CELL_COUNT}" }
+        require(openMap.size == Board.CELL_COUNT) { "openMap 长度必须为 ${Board.CELL_COUNT}" }
         require(remainingItems.size == Board.ITEM_GROUP_COUNT)
 
         val occupied = IntArray(Board.CELL_COUNT)
