@@ -415,13 +415,19 @@ private fun PlacementHint(
     val group = state.itemGroups[itemIndex]
     val eh = if (rotated) group.item.width else group.item.height
     val ew = if (rotated) group.item.height else group.item.width
+    // 与右栏放置按钮一致：按放置后的实际形状显示竖/横，正方形不显示方向
+    val orientation = when {
+        eh > ew -> " · 竖"
+        eh < ew -> " · 横"
+        else -> ""
+    }
     Surface(
         modifier = modifier,
         color = itemColor(itemIndex).copy(alpha = 0.95f),
         shape = RoundedCornerShape(24.dp),
     ) {
         Text(
-            text = "物品 ${itemIndex + 1} · ${eh}×${ew}${if (rotated) " (旋转)" else ""} · " +
+            text = "物品 ${itemIndex + 1}$orientation · " +
                 if (hasPreview) "再点预览格确认放置" else "点击格子选择位置",
             color = Color(0xFF111111),
             fontWeight = FontWeight.SemiBold,

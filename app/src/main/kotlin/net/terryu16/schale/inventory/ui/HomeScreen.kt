@@ -40,7 +40,7 @@ import net.terryu16.schale.inventory.ui.theme.SchaleColors
  * 当前活动的放置模式，null 表示棋盘处于普通"翻牌"模式。
  *
  * 两步式放置：
- *   1. 用户从右栏点击"放置 W×H"按钮 → placement=PlacementMode(idx, rot, previewCoord=null)
+ *   1. 用户从右栏点击「竖」「横」（正方形为「放置」）按钮 → placement=PlacementMode(idx, rot, previewCoord=null)
  *   2. 用户在棋盘上点击任意格子 → previewCoord 被填上，棋盘渲染闪烁/半透明预览
  *   3. 用户在预览区域内再点击一次 → 确认放置
  *      用户点击预览以外的合法格子 → 预览移到新位置

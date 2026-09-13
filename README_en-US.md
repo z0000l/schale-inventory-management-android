@@ -20,7 +20,7 @@ It is a probability calculator for the "Inventory Management" tile-flipping mini
 - **Landscape-first layout**: three columns — level picker / controls on the left, 9×5 board in the center, item configuration on the right.
 - **Probability heatmap**: 8 maps for the 2³ item combinations, colored by item type. Single item uses that item's color; combinations use a blue→orange gradient.
 - **Recommended-flip hint**: the cell with the highest probability pulses with a golden glow.
-- **Item placement mode**: tap a "Place W×H" button on a right-side card to enter placement mode, then tap any legal spot on the board to drop the item. Rectangular items get both an "Original" and a "Rotated" button.
+- **Item placement mode**: tap a place button on a right-side card to enter placement mode, then tap any legal spot on the board to drop the item. Rectangular items get a "竖" (vertical) and a "横" (horizontal) button, named after the shape as placed, with vertical always first; square items get a single "放置" (place) button.
 - **Immersive fullscreen**: status bar and navigation bar hidden, content extended into the display cutout via `short edges`, avoiding accidental gesture triggers.
 - **Keep screen on**: the screen will not auto-sleep while calculating.
 - **Dark UI**: aligned with the in-game art style, easier on the eyes during long sessions.

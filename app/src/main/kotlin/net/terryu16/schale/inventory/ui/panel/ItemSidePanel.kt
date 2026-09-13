@@ -10,7 +10,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DeleteOutline
 import androidx.compose.material.icons.filled.Remove
-import androidx.compose.material.icons.filled.Rotate90DegreesCw
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,6 +26,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
+import net.terryu16.schale.inventory.data.Item
 import net.terryu16.schale.inventory.data.ItemGroup
 import net.terryu16.schale.inventory.ui.PlacementMode
 import net.terryu16.schale.inventory.ui.UiState
@@ -148,8 +148,7 @@ private fun ItemCard(
                 )
             }
 
-            // 放置按钮行：[删除已放置 dropdown] [按当前形状放置] [旋转后放置 (仅矩形)]
-            val isSquare = group.item.height == group.item.width
+            // 放置按钮行：[删除已放置 dropdown] [竖] [横]；正方形无方向之分，只有一个 [放置]
             Row(
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
                 verticalAlignment = Alignment.CenterVertically,
@@ -159,22 +158,13 @@ private fun ItemCard(
                     onRemove = onRemovePlaced,
                     color = tint,
                 )
-                PlaceButton(
-                    text = "${group.item.height}×${group.item.width}",
-                    color = tint,
-                    enabled = placedCount < group.count,
-                    active = isActivePlacement && activeRotated == false,
-                    onClick = { onPlace(false) },
-                    modifier = Modifier.weight(1f),
-                )
-                if (!isSquare) {
+                placeOptions(group.item).forEach { (label, rotated) ->
                     PlaceButton(
-                        text = "${group.item.width}×${group.item.height}",
+                        text = label,
                         color = tint,
-                        icon = Icons.Filled.Rotate90DegreesCw,
                         enabled = placedCount < group.count,
-                        active = isActivePlacement && activeRotated == true,
-                        onClick = { onPlace(true) },
+                        active = isActivePlacement && activeRotated == rotated,
+                        onClick = { onPlace(rotated) },
                         modifier = Modifier.weight(1f),
                     )
                 }
@@ -341,8 +331,17 @@ private fun StepperIconButton(
 }
 
 /**
- * 紧凑放置按钮：单行 [icon] [W×H]，无 "放置" 字样以节省宽度。
- * Icon 表达动作：+ 表示按当前形状放置，↻ 表示旋转后放置。
+ * 物品的放置选项：(按钮文字, 是否旋转)。
+ * 竖/横 按放置后的实际形状判定（高>宽 为竖），竖恒在前；正方形无方向之分，只有一个「放置」。
+ */
+internal fun placeOptions(item: Item): List<Pair<String, Boolean>> = when {
+    item.isSquare -> listOf("放置" to false)
+    item.height > item.width -> listOf("竖" to false, "横" to true)
+    else -> listOf("竖" to true, "横" to false)
+}
+
+/**
+ * 紧凑放置按钮：单行 [+] [竖/横/放置]。
  *
  * 当 active=true 时（即当前激活的放置模式），再次点击会触发 onClick —— 上层把它解释为
  * "退出放置模式"。
@@ -351,7 +350,6 @@ private fun StepperIconButton(
 private fun PlaceButton(
     text: String,
     color: Color,
-    icon: androidx.compose.ui.graphics.vector.ImageVector? = null,
     enabled: Boolean,
     active: Boolean,
     onClick: () -> Unit,
@@ -372,7 +370,7 @@ private fun PlaceButton(
         contentPadding = PaddingValues(horizontal = 4.dp, vertical = 0.dp),
     ) {
         Icon(
-            icon ?: Icons.Filled.Add,
+            Icons.Filled.Add,
             contentDescription = null,
             modifier = Modifier.size(12.dp),
         )
